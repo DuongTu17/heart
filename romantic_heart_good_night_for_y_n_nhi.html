@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Nguyễn Thị Yến Nhi Ngủ Ngon ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            background-color: #0b091a;
+            color: #fff;
+        }
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+        .font-title {
+            font-family: 'Great Vibes', cursive;
+        }
+        
+        /* Custom glow effects */
+        .glow-text {
+            text-shadow: 0 0 15px rgba(244, 114, 182, 0.8), 0 0 30px rgba(244, 114, 182, 0.5);
+        }
+        .glow-card {
+            box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.3), 0 0 20px 2px rgba(168, 85, 247, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Pulse Heart CSS */
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+        .animate-heartbeat {
+            animation: heartPulse 2.2s infinite ease-in-out;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: floatSlow 5s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 12, 41, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between items-center select-none overflow-x-hidden">
+
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Main Container -->
+    <div class="relative z-10 w-full min-h-screen flex flex-col justify-between items-center px-4 py-8 max-w-4xl mx-auto">
+        
+        <header class="w-full flex justify-between items-center py-2 px-4 rounded-full bg-slate-900/40 border border-pink-500/20 backdrop-blur-md">
+            <div class="flex items-center space-x-2 text-pink-300 font-semibold text-sm sm:text-base">
+                <i data-lucide="moon" class="w-5 h-5 text-yellow-300 animate-pulse"></i>
+                <span>Good Night, Yến Nhi ✨</span>
+            </div>
+            
+            <button id="musicToggle" class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-pink-500/20 hover:bg-pink-500/30 border border-pink-500/40 text-pink-200 transition-all text-xs sm:text-sm font-medium cursor-pointer">
+                <i data-lucide="music" id="musicIcon" class="w-4 h-4"></i>
+                <span id="musicStatus">Nhạc Thư Giãn</span>
+            </button>
+        </header>
+
+        <main class="w-full my-auto flex flex-col items-center text-center space-y-6 pt-6 pb-6">
+            
+            <!-- Glowing Heart Canvas Container -->
+            <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
+                <!-- Outer Pulsing Glow Circle -->
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-pink-600/30 via-purple-600/20 to-indigo-600/30 blur-2xl animate-pulse"></div>
+                
+                <!-- Heart Particle Canvas -->
+                <canvas id="heartCanvas" class="w-full h-full cursor-pointer relative z-10" title="Chạm vào trái tim nè!"></canvas>
+
+                <!-- Center Name overlay inside heart -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
+                    <p class="text-pink-200/80 text-xs sm:text-sm tracking-widest uppercase font-medium">Sweet Dreams</p>
+                    <h2 class="font-title text-2xl sm:text-3xl md:text-4xl text-pink-100 glow-text px-2">Nguyễn Thị Yến Nhi</h2>
+                    <div class="w-12 h-0.5 bg-pink-400/60 rounded-full my-1"></div>
+                    <p class="text-xs text-pink-300/90 italic font-cursive">Chúc em ngủ thật ngon ❤️</p>
+                </div>
+            </div>
+
+            <div class="w-full max-w-lg bg-slate-900/60 border border-pink-500/30 rounded-3xl p-6 sm:p-8 glow-card animate-float relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-28 h-28 bg-pink-500/10 rounded-full blur-xl pointer-events-none"></div>
+                
+                <h1 class="font-title text-3xl sm:text-4xl text-pink-300 mb-3 glow-text">Gửi Yến Nhi Thân Yêu 🌙</h1>
+                
+                <div id="wishesText" class="text-slate-200 text-sm sm:text-base leading-relaxed space-y-3 font-normal min-h-[100px] flex items-center justify-center">
+                    <p class="transition-opacity duration-500">
+                        "Mặt trời đã đi ngủ rồi, các vì sao cũng đã lên thắp sáng bầu trời. Chúc Yến Nhi gác lại mọi mệt mỏi của ngày hôm nay, ôm lấy chiếc gối ấm áp và có những giấc mơ thật đẹp nhé!"
+                    </p>
+                </div>
+
+                <!-- Interactive Buttons inside Card -->
+                <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                    <button id="btnNewWish" class="px-4 py-2 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-pink-500/25 transition-all transform active:scale-95 flex items-center space-x-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Lời chúc khác 💌</span>
+                    </button>
+
+                    <button id="btnSendLove" class="px-4 py-2 rounded-2xl bg-slate-800/80 hover:bg-slate-700/80 border border-pink-400/30 text-pink-300 font-semibold text-xs sm:text-sm transition-all transform active:scale-95 flex items-center space-x-2">
+                        <i data-lucide="heart" class="w-4 h-4 text-pink-400 fill-pink-400"></i>
+                        <span>Thả bão tim 💖</span>
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="w-full text-center text-slate-400 text-xs py-4 border-t border-slate-800/60">
+            <p class="flex items-center justify-center gap-1">
+                Chạm vào trái tim hoặc màn hình để tạo điều kỳ diệu ✨ | Dành riêng cho 
+                <span class="text-pink-300 font-semibold">Nguyễn Thị Yến Nhi</span>
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- Hidden Audio Element using ToneJS Web Audio Synthesizer fallback for smooth lofi ambient sound -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Canvas Setup
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        const heartCanvas = document.getElementById('heartCanvas');
+        const heartCtx = heartCanvas.getContext('2d');
+
+        let width, height;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            bgCanvas.width = width;
+            bgCanvas.height = height;
+
+            // Heart Canvas maintains square ratio
+            const heartSize = Math.min(width * 0.8, 380);
+            heartCanvas.width = heartSize;
+            heartCanvas.height = heartSize;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const stars = [];
+        const bgParticles = [];
+        
+        // Generate Stars
+        for (let i = 0; i < 150; i++) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 1.5 + 0.5,
+                alpha: Math.random(),
+                speed: Math.random() * 0.02 + 0.005
+            });
+        }
+
+        // Floating Hearts in background
+        class FloatingHeart {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + 20;
+                this.size = Math.random() * 12 + 6;
+                this.speedY = Math.random() * 1 + 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.alpha = Math.random() * 0.5 + 0.3;
+                this.color = `hsla(${Math.random() * 30 + 330}, 80%, 75%, ${this.alpha})`;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += Math.sin(this.y * 0.01) * 0.5 + this.speedX;
+                if (this.y < -20) this.reset();
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                const s = this.size;
+                ctx.moveTo(0, -s/2);
+                ctx.bezierCurveTo(s/2, -s, s, -s/3, 0, s/2);
+                ctx.bezierCurveTo(-s, -s/3, -s/2, -s, 0, -s/2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 25; i++) {
+            bgParticles.push(new FloatingHeart());
+        }
+
+        // Render Background
+        function animateBackground() {
+            bgCtx.clearRect(0, 0, width, height);
+
+            // Draw Stars
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                bgCtx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                bgCtx.beginPath();
+                bgCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                bgCtx.fill();
+            });
+
+            // Draw Background Floating Hearts
+            bgParticles.forEach(p => {
+                p.update();
+                p.draw(bgCtx);
+            });
+
+            requestAnimationFrame(animateBackground);
+        }
+        animateBackground();
+
+        class HeartParticle {
+            constructor(cx, cy, scale) {
+                this.cx = cx;
+                this.cy = cy;
+                this.scale = scale;
+                this.reset();
+            }
+            
+            reset() {
+                // Heart parametric equation
+                const t = Math.random() * Math.PI * 2;
+                // Parametric heart formula
+                const xVal = 16 * Math.pow(Math.sin(t), 3);
+                const yVal = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+
+                this.baseX = this.cx + xVal * this.scale;
+                this.baseY = this.cy + yVal * this.scale;
+
+                this.x = this.cx + (Math.random() - 0.5) * 50;
+                this.y = this.cy + (Math.random() - 0.5) * 50;
+
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+
+                this.size = Math.random() * 2.5 + 1;
+                this.color = `hsl(${330 + Math.random() * 30}, 100%, ${65 + Math.random() * 25}%)`;
+                this.alpha = Math.random() * 0.8 + 0.2;
+            }
+
+            update(pulseFactor) {
+                // Return to target heart point with elastic ease
+                const targetX = this.cx + (this.baseX - this.cx) * pulseFactor;
+                const targetY = this.cy + (this.baseY - this.cy) * pulseFactor;
+
+                this.x += (targetX - this.x) * 0.05 + this.vx;
+                this.y += (targetY - this.y) * 0.05 + this.vy;
+
+                this.vx *= 0.92;
+                this.vy *= 0.92;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = '#f472b6';
+                ctx.shadowBlur = 8;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const heartParticles = [];
+        const numHeartParticles = 320;
+        let pulseTime = 0;
+
+        function initHeart() {
+            heartParticles.length = 0;
+            const cx = heartCanvas.width / 2;
+            const cy = heartCanvas.height / 2 - 10;
+            const scale = Math.min(heartCanvas.width, heartCanvas.height) / 38;
+
+            for (let i = 0; i < numHeartParticles; i++) {
+                heartParticles.push(new HeartParticle(cx, cy, scale));
+            }
+        }
+        initHeart();
+
+        function animateHeart() {
+            heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+            
+            pulseTime += 0.04;
+            // Smooth heartbeat scale oscillation
+            const pulse = 1 + Math.sin(pulseTime * 2) * 0.08 + Math.pow(Math.sin(pulseTime * 4), 2) * 0.04;
+
+            heartParticles.forEach(p => {
+                p.update(pulse);
+                p.draw(heartCtx);
+            });
+
+            requestAnimationFrame(animateHeart);
+        }
+        animateHeart();
+
+        function createBurst(x, y) {
+            for (let i = 0; i < 20; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 4 + 2;
+                const particle = new FloatingHeart();
+                particle.x = x;
+                particle.y = y;
+                particle.speedX = Math.cos(angle) * speed;
+                particle.speedY = Math.sin(angle) * speed;
+                particle.size = Math.random() * 10 + 6;
+                bgParticles.push(particle);
+            }
+        }
+
+        window.addEventListener('click', (e) => {
+            // Avoid triggering burst when clicking buttons
+            if (e.target.closest('button')) return;
+            createBurst(e.clientX, e.clientY);
+        });
+
+        heartCanvas.addEventListener('click', (e) => {
+            const rect = heartCanvas.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            // Explode heart particles temporarily
+            heartParticles.forEach(p => {
+                p.vx = (Math.random() - 0.5) * 15;
+                p.vy = (Math.random() - 0.5) * 15;
+            });
+
+            createBurst(x, y);
+        });
+
+        const wishes = [
+            "Mặt trời đã đi ngủ rồi, các vì sao cũng đã lên thắp sáng bầu trời. Chúc Yến Nhi gác lại mọi mệt mỏi của ngày hôm nay, ôm lấy chiếc gối ấm áp và có những giấc mơ thật đẹp nhé! ❤️",
+            "Đêm đã về khuya, chúc Yến Nhi ngủ thật ngon, có một giấc ngủ say êm đềm và thức dậy với một nụ cười rạng rỡ vào ngày mai! ✨",
+            "Mỗi ngôi sao trên bầu trời tối nay giống như một lời chúc ngọt ngào gửi tới Nguyễn Thị Yến Nhi. Chúc em có một đêm bình yên và giấc mơ tràn ngập niềm vui! 🌙",
+            "Nhắm mắt lại và thả lỏng người nào Yến Nhi ơi! Hãy để những giấc mơ đẹp đưa em đến những nơi thật bình yên và hạnh phúc. Ngủ ngon nhé em! 💖",
+            "Sương đêm đã xuống lạnh rồi, Yến Nhi nhớ đắp chăn thật ấm và ngủ thật ngoan nhen. Chúc em có giấc ngủ thật là ngon giấc! 🧸"
+        ];
+
+        let currentWishIndex = 0;
+        const wishesTextElement = document.getElementById('wishesText');
+        const btnNewWish = document.getElementById('btnNewWish');
+        const btnSendLove = document.getElementById('btnSendLove');
+
+        btnNewWish.addEventListener('click', () => {
+            currentWishIndex = (currentWishIndex + 1) % wishes.length;
+            wishesTextElement.style.opacity = '0';
+            setTimeout(() => {
+                wishesTextElement.innerHTML = `<p class="transition-opacity duration-500">"${wishes[currentWishIndex]}"</p>`;
+                wishesTextElement.style.opacity = '1';
+            }, 300);
+        });
+
+        btnSendLove.addEventListener('click', () => {
+            // Trigger massive heart burst across screen
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const rx = Math.random() * width;
+                    const ry = Math.random() * (height * 0.7);
+                    createBurst(rx, ry);
+                }, i * 150);
+            }
+        });
+
+        let isPlaying = false;
+        let synth, loop;
+
+        async function initAudio() {
+            await Tone.start();
+            
+            // Create soft soothing synth ambient pad
+            synth = new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "sine" },
+                envelope: {
+                    attack: 1.5,
+                    decay: 2,
+                    sustain: 0.6,
+                    release: 3
+                }
+            }).toDestination();
+
+            synth.volume.value = -16;
+
+            // Simple calming chord progression (Cmaj7 - Am7 - Fmaj7 - G)
+            const chords = [
+                ["C4", "E4", "G4", "B4"],
+                ["A3", "C4", "E4", "G4"],
+                ["F3", "A3", "C4", "E4"],
+                ["G3", "B3", "D4", "F#4"]
+            ];
+
+            let chordIndex = 0;
+            loop = new Tone.Loop(time => {
+                synth.triggerAttackRelease(chords[chordIndex], "2m", time);
+                chordIndex = (chordIndex + 1) % chords.length;
+            }, "2m");
+
+            Tone.Transport.bpm.value = 55;
+        }
+
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicStatus = document.getElementById('musicStatus');
+
+        musicToggle.addEventListener('click', async () => {
+            if (!synth) {
+                await initAudio();
+            }
+
+            if (!isPlaying) {
+                Tone.Transport.start();
+                loop.start(0);
+                isPlaying = true;
+                musicStatus.innerText = "Đang Phát 🎵";
+                musicToggle.classList.add('bg-pink-500/40', 'border-pink-400');
+                musicIcon.classList.add('animate-spin');
+            } else {
+                Tone.Transport.stop();
+                isPlaying = false;
+                musicStatus.innerText = "Nhạc Thư Giãn";
+                musicToggle.classList.remove('bg-pink-500/40', 'border-pink-400');
+                musicIcon.classList.remove('animate-spin');
+            }
+        });
+    </script>
+</body>
+</html>
