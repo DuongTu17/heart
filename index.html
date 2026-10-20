@@ -17,17 +17,16 @@
         :root {
             --primary: #ff6b8b;
             --primary-dark: #d81b60;
-            --accent: #ff8eaf;
             --bg-start: #fff0f3;
             --bg-end: #ffe3e8;
             --text-color: #4a3e43;
-            --gold: #d4af37;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -35,26 +34,24 @@
             background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
             min-height: 100vh;
             color: var(--text-color);
-            overflow-x: hidden;
             position: relative;
         }
 
-        /* Particle Canvas */
+        /* Particle Canvas - pointer-events none triệt để */
         #particleCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            pointer-events: none !important;
             z-index: 1;
         }
 
-        /* Layout Container */
         .app-container {
             position: relative;
-            z-index: 2;
-            max-width: 850px;
+            z-index: 10;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             min-height: 100vh;
@@ -67,7 +64,7 @@
         header {
             text-align: center;
             margin-bottom: 25px;
-            animation: fadeInDown 1s ease-out;
+            pointer-events: none;
         }
 
         .badge-date {
@@ -78,16 +75,14 @@
             border-radius: 50px;
             font-size: 0.95rem;
             font-weight: 700;
-            letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(255, 107, 139, 0.2);
-            backdrop-filter: blur(5px);
             margin-bottom: 12px;
             border: 1px solid rgba(255, 182, 193, 0.6);
         }
 
         h1.main-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.9rem;
+            font-size: 2.8rem;
             color: var(--primary-dark);
             line-height: 1.2;
             margin-bottom: 8px;
@@ -99,30 +94,28 @@
             font-weight: 500;
         }
 
-        /* Envelope */
+        /* Envelope Nút bấm rõ ràng */
         .envelope-wrapper {
-            position: relative;
             width: 100%;
             max-width: 480px;
             margin: 20px 0;
             cursor: pointer;
+            z-index: 100;
         }
 
         .envelope {
             width: 100%;
             background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(216, 27, 96, 0.15);
-            padding: 38px 25px;
+            box-shadow: 0 15px 35px rgba(216, 27, 96, 0.18);
+            padding: 40px 25px;
             text-align: center;
-            position: relative;
-            transition: transform 0.4s ease, box-shadow 0.3s;
             border: 2px solid #fff0f3;
+            transition: transform 0.2s ease;
         }
 
-        .envelope:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(216, 27, 96, 0.22);
+        .envelope:active {
+            transform: scale(0.98);
         }
 
         .envelope-icon {
@@ -137,13 +130,6 @@
             color: white;
             font-size: 2.2rem;
             box-shadow: 0 8px 20px rgba(255, 107, 139, 0.35);
-            animation: pulseHeart 1.8s infinite;
-        }
-
-        @keyframes pulseHeart {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
         }
 
         .envelope-to {
@@ -158,33 +144,36 @@
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
             color: var(--primary-dark);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
-        .click-hint {
+        .btn-open {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #fff0f3;
-            color: var(--primary-dark);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            gap: 10px;
+            background: linear-gradient(135deg, #ff6b8b, #d81b60);
+            color: #ffffff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(216, 27, 96, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
-        /* Modal Card */
+        /* Modal Bức Thư Chi Tiết */
         .card-modal {
             display: none;
             width: 100%;
             max-width: 680px;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(10px);
+            background: #ffffff;
             border-radius: 24px;
-            padding: 40px 32px;
-            box-shadow: 0 20px 50px rgba(216, 27, 96, 0.18);
+            padding: 40px 30px;
+            box-shadow: 0 20px 50px rgba(216, 27, 96, 0.2);
             border: 2px solid #ffffff;
-            animation: zoomIn 0.5s ease forwards;
+            animation: fadeIn 0.4s ease forwards;
+            z-index: 100;
         }
 
         .letter-header {
@@ -222,7 +211,7 @@
             margin-top: 20px;
         }
 
-        /* Mini Game Section */
+        /* Game Rút Quẻ */
         .interactive-section {
             margin-top: 25px;
             border-top: 2px dashed #ffd1dc;
@@ -247,16 +236,10 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 6px 18px rgba(216, 27, 96, 0.28);
-            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             font-family: 'Quicksand', sans-serif;
-        }
-
-        .btn-draw:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(216, 27, 96, 0.38);
         }
 
         .wish-box {
@@ -267,13 +250,12 @@
             padding: 18px 20px;
             border-radius: 16px;
             color: #d81b60;
-            font-size: 1.08rem;
+            font-size: 1.05rem;
             font-weight: 600;
             line-height: 1.6;
-            animation: fadeIn 0.4s ease;
         }
 
-        /* Music Control Button */
+        /* Audio Button */
         .audio-btn {
             position: fixed;
             bottom: 25px;
@@ -289,19 +271,13 @@
             font-size: 1.25rem;
             box-shadow: 0 6px 22px rgba(0, 0, 0, 0.15);
             cursor: pointer;
-            z-index: 10;
+            z-index: 999;
             border: 2px solid #ffe3e8;
-            transition: all 0.3s;
         }
 
         .audio-btn.playing {
-            animation: spin 5s linear infinite;
             background: #ff6b8b;
             color: white;
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
         }
 
         footer {
@@ -311,19 +287,9 @@
             color: #888;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @media (max-width: 600px) {
@@ -337,10 +303,8 @@
 </head>
 <body>
 
-    <!-- Particle Canvas -->
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Audio Element (Nhạc Lofi / Chill nhẹ nhàng giải tỏa căng thẳng) -->
     <audio id="bgMusic" loop preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
     </audio>
@@ -353,11 +317,77 @@
             <p class="sub-title">Món quà nhỏ gửi tặng em gái Ngô Thu Hằng</p>
         </header>
 
-        <!-- Envelope -->
-        <div class="envelope-wrapper" id="envelopeWrapper" onclick="openCard()">
+        <!-- Khung phong thư có nút bấm rõ ràng -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
             <div class="envelope">
                 <div class="envelope-icon">
                     <i class="fa-solid fa-envelope-open-text"></i>
                 </div>
                 <div class="envelope-to">Thư chúc mừng gửi em gái:</div>
-                <div class="envelope-name">Ngô Thu Hằng
+                <div class="envelope-name">Ngô Thu Hằng</div>
+                <button class="btn-open" id="openBtn">
+                    <i class="fa-solid fa-envelope-open"></i> Nhấp Để Mở Thư
+                </button>
+            </div>
+        </div>
+
+        <!-- Nội dung thiệp -->
+        <div class="card-modal" id="cardModal">
+            <div class="letter-header">
+                <h2>Gửi em gái Thu Hằng,</h2>
+            </div>
+
+            <div class="letter-body">
+                <p>Nhân ngày 20/10, chúc em gái luôn xinh đẹp, rạng rỡ, tràn đầy năng lượng và luôn giữ vững tinh thần vui vẻ, tự tin mỗi ngày.</p>
+                <p>Năm nay là một năm vô cùng quan trọng đối với Hằng khi em chuẩn bị bước vào kỳ thi chuyển cấp vào 10. Biết rằng chặng đường ôn luyện sắp tới sẽ có không ít áp lực và bài vở vất vả, nhưng hãy luôn kiên trì và tin tưởng vào khả năng của bản thân mình nhé!</p>
+                <p>Chúc em ôn thi thật hiệu quả, giữ gìn sức khỏe thật tốt và chắc chắn sẽ đỗ vào trường Cấp 3 nguyện vọng 1 với điểm số thật cao. Mọi người luôn tin tưởng và ủng hộ Thu Hằng hết mình. Cố lên em nhé!</p>
+            </div>
+
+            <div class="letter-footer">
+                Quyết tâm đỗ Cấp 3 nguyện vọng 1 nhé! 🎓✨
+            </div>
+
+            <!-- Mini Game -->
+            <div class="interactive-section">
+                <div class="game-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Quẻ May Mắn Thi Cấp 3 Cho Thu Hằng</div>
+                <button class="btn-draw" id="drawBtn">
+                    <i class="fa-solid fa-gift"></i> Rút Quẻ Ngẫu Nhiên
+                </button>
+                <div class="wish-box" id="wishBox"></div>
+            </div>
+        </div>
+
+        <footer>
+            Gửi tới Ngô Thu Hằng • 20/10 Special Edition
+        </footer>
+    </div>
+
+    <!-- Nút Nhạc -->
+    <div class="audio-btn" id="audioBtn" title="Bật/Tắt Nhạc Nền">
+        <i class="fa-solid fa-music"></i>
+    </div>
+
+    <script>
+        // Canvas Cánh Hoa Rơi
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const colors = ['#ffb6c1', '#ff6b8b', '#ffa07a', '#ffc0cb'];
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = -20;
+                this.size = Math.random() * 10 + 6;
+                this.speedY = Math.random() * 1.3 + 0.6;
+                this.speedX = Math.random() * 1.2 - 0.6;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
