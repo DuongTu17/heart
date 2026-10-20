@@ -3,461 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Phương Anh ngủ ngonn ❤️</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Gửi Ngô Thu Hằng - Chúc Mừng Ngày 20/10 & Đỗ Cấp 3!</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
+        :root {
+            --primary: #ff6b8b;
+            --primary-dark: #d81b60;
+            --accent: #ff8eaf;
+            --bg-start: #fff0f3;
+            --bg-end: #ffe3e8;
+            --text-color: #4a3e43;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            min-height: 100vh;
+            color: var(--text-color);
             overflow-x: hidden;
-            background-color: #0b091a;
-            color: #fff;
+            position: relative;
         }
-        .font-cursive {
+
+        /* Particle Canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Layout Container */
+        .app-container {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .badge-date {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-dark);
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.2);
+            backdrop-filter: blur(5px);
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 182, 193, 0.6);
+        }
+
+        h1.main-title {
             font-family: 'Dancing Script', cursive;
-        }
-        .font-title {
-            font-family: 'Great Vibes', cursive;
-        }
-        
-        /* Custom glow effects */
-        .glow-text {
-            text-shadow: 0 0 15px rgba(244, 114, 182, 0.8), 0 0 30px rgba(244, 114, 182, 0.5);
-        }
-        .glow-card {
-            box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.3), 0 0 20px 2px rgba(168, 85, 247, 0.2);
-            backdrop-filter: blur(12px);
+            font-size: 2.9rem;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 8px;
         }
 
-        /* Pulse Heart CSS */
-        @keyframes heartPulse {
+        .sub-title {
+            font-size: 1.05rem;
+            color: #7a616c;
+            font-weight: 500;
+        }
+
+        /* Envelope */
+        .envelope-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .envelope {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(216, 27, 96, 0.15);
+            padding: 38px 25px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.3s;
+            border: 2px solid #fff0f3;
+        }
+
+        .envelope:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(216, 27, 96, 0.22);
+        }
+
+        .envelope-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff8eaf, #ff6b8b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2.2rem;
+            box-shadow: 0 8px 20px rgba(255, 107, 139, 0.35);
+            animation: pulseHeart 1.8s infinite;
+        }
+
+        @keyframes pulseHeart {
             0% { transform: scale(1); }
-            14% { transform: scale(1.15); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.15); }
-            70% { transform: scale(1); }
-        }
-        .animate-heartbeat {
-            animation: heartPulse 2.2s infinite ease-in-out;
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
         }
 
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(2deg); }
-        }
-        .animate-float {
-            animation: floatSlow 5s infinite ease-in-out;
+        .envelope-to {
+            font-size: 0.95rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
+        .envelope-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
         }
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 12, 41, 0.8);
+
+        .click-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff0f3;
+            color: var(--primary-dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #ec4899;
-            border-radius: 10px;
+
+        /* Modal Card */
+        .card-modal {
+            display: none;
+            width: 100%;
+            max-width: 680px;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 50px rgba(216, 27, 96, 0.18);
+            border: 2px solid #ffffff;
+            animation: zoomIn 0.5s ease forwards;
+        }
+
+        .letter-header {
+            text-align: center;
+            border-bottom: 2px dashed #ffd1dc;
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+        }
+
+        .letter-header h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+        }
+
+        .letter-body {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #3a2e33;
+            text-align: justify;
+            margin-bottom: 25px;
+        }
+
+        .letter-body p {
+            margin-bottom: 15px;
+            text-indent: 24px;
+        }
+
+        .letter-footer {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Mini Game Section */
+        .interactive-section {
+            margin-top: 25px;
+            border-top: 2px dashed #ffd1dc;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 14px;
+        }
+
+        .btn-draw {
+            background: linear-gradient(135deg, #ff6b8b, #d81b60);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(216, 27, 96, 0.28);
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn-draw:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(216, 27, 96, 0.38);
+        }
+
+        .wish-box {
+            display: none;
+            margin-top: 18px;
+            background: #fff5f7;
+            border: 2px solid #ffb6c1;
+            padding: 18px 20px;
+            border-radius: 16px;
+            color: #d81b60;
+            font-size: 1.08rem;
+            font-weight: 600;
+            line-height: 1.6;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Music Control Button */
+        .audio-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 52px;
+            height: 52px;
+            background: #ffffff;
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            z-index: 10;
+            border: 2px solid #ffe3e8;
+            transition: all 0.3s;
+        }
+
+        .audio-btn.playing {
+            animation: spin 5s linear infinite;
+            background: #ff6b8b;
+            color: white;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.88rem;
+            color: #888;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            h1.main-title { font-size: 2.1rem; }
+            .envelope-name { font-size: 2.5rem; }
+            .card-modal { padding: 25px 20px; }
+            .letter-header h2 { font-size: 2rem; }
+            .letter-body { font-size: 0.98rem; text-align: left; }
         }
     </style>
 </head>
-<body class="min-h-screen relative flex flex-col justify-between items-center select-none overflow-x-hidden">
+<body>
 
-    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
 
-    <!-- Main Container -->
-    <div class="relative z-10 w-full min-h-screen flex flex-col justify-between items-center px-4 py-8 max-w-4xl mx-auto">
+    <!-- Audio Element (Nhạc Lofi / Chill nhẹ nhàng giải tỏa căng thẳng) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="app-container">
         
-        <header class="w-full flex justify-between items-center py-2 px-4 rounded-full bg-slate-900/40 border border-pink-500/20 backdrop-blur-md">
-            <div class="flex items-center space-x-2 text-pink-300 font-semibold text-sm sm:text-base">
-                <i data-lucide="moon" class="w-5 h-5 text-yellow-300 animate-pulse"></i>
-                <span>Good Night, Phương Anh✨</span>
-            </div>
-            
-            <button id="musicToggle" class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-pink-500/20 hover:bg-pink-500/30 border border-pink-500/40 text-pink-200 transition-all text-xs sm:text-sm font-medium cursor-pointer">
-                <i data-lucide="music" id="musicIcon" class="w-4 h-4"></i>
-                <span id="musicStatus">Nhạc Thư Giãn</span>
-            </button>
+        <header>
+            <div class="badge-date"><i class="fa-solid fa-graduation-cap"></i> 20 THÁNG 10</div>
+            <h1 class="main-title">Chúc Mừng Ngày Phụ Nữ Việt Nam</h1>
+            <p class="sub-title">Món quà nhỏ gửi tặng em gái Ngô Thu Hằng</p>
         </header>
 
-        <main class="w-full my-auto flex flex-col items-center text-center space-y-6 pt-6 pb-6">
-            
-            <!-- Glowing Heart Canvas Container -->
-            <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
-                <!-- Outer Pulsing Glow Circle -->
-                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-pink-600/30 via-purple-600/20 to-indigo-600/30 blur-2xl animate-pulse"></div>
-                
-                <!-- Heart Particle Canvas -->
-                <canvas id="heartCanvas" class="w-full h-full cursor-pointer relative z-10" title="Chạm vào trái tim nè!"></canvas>
-
-                <!-- Center Name overlay inside heart -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
-                    <p class="text-pink-200/80 text-xs sm:text-sm tracking-widest uppercase font-medium">Sweet Dreams</p>
-                    <h2 class="font-title text-2xl sm:text-3xl md:text-4xl text-pink-100 glow-text px-2">Phương Anh</h2>
-                    <div class="w-12 h-0.5 bg-pink-400/60 rounded-full my-1"></div>
-                    <p class="text-xs text-pink-300/90 italic font-cursive">Chúc em ngủ thật ngon ❤️</p>
+        <!-- Envelope -->
+        <div class="envelope-wrapper" id="envelopeWrapper" onclick="openCard()">
+            <div class="envelope">
+                <div class="envelope-icon">
+                    <i class="fa-solid fa-envelope-open-text"></i>
                 </div>
-            </div>
-
-            <div class="w-full max-w-lg bg-slate-900/60 border border-pink-500/30 rounded-3xl p-6 sm:p-8 glow-card animate-float relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-28 h-28 bg-pink-500/10 rounded-full blur-xl pointer-events-none"></div>
-                
-                <h1 class="font-title text-3xl sm:text-4xl text-pink-300 mb-3 glow-text">Gửi Phương Anh Thân Yêu 🌙</h1>
-                
-                <div id="wishesText" class="text-slate-200 text-sm sm:text-base leading-relaxed space-y-3 font-normal min-h-[100px] flex items-center justify-center">
-                    <p class="transition-opacity duration-500">
-                        "Mặt trời đã đi ngủ rồi, các vì sao cũng đã lên thắp sáng bầu trời. Chúc Phương Anh gác lại mọi mệt mỏi của ngày hôm nay, ôm lấy chiếc gối ấm áp và có những giấc mơ thật đẹp nhé!"
-                    </p>
-                </div>
-
-                <!-- Interactive Buttons inside Card -->
-                <div class="mt-6 flex flex-wrap gap-3 justify-center">
-                    <button id="btnNewWish" class="px-4 py-2 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-pink-500/25 transition-all transform active:scale-95 flex items-center space-x-2">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i>
-                        <span>Lời chúc khác 💌</span>
-                    </button>
-
-                    <button id="btnSendLove" class="px-4 py-2 rounded-2xl bg-slate-800/80 hover:bg-slate-700/80 border border-pink-400/30 text-pink-300 font-semibold text-xs sm:text-sm transition-all transform active:scale-95 flex items-center space-x-2">
-                        <i data-lucide="heart" class="w-4 h-4 text-pink-400 fill-pink-400"></i>
-                        <span>Thả bão tim 💖</span>
-                    </button>
-                </div>
-            </div>
-
-        </main>
-
-        <footer class="w-full text-center text-slate-400 text-xs py-4 border-t border-slate-800/60">
-            <p class="flex items-center justify-center gap-1">
-                Chạm vào trái tim hoặc màn hình để tạo điều kỳ diệu ✨ | Dành riêng cho 
-                <span class="text-pink-300 font-semibold">Phương Anh</span>
-            </p>
-        </footer>
-
-    </div>
-
-    <!-- Hidden Audio Element using ToneJS Web Audio Synthesizer fallback for smooth lofi ambient sound -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-
-    <script>
-        
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // Canvas Setup
-        const bgCanvas = document.getElementById('bgCanvas');
-        const bgCtx = bgCanvas.getContext('2d');
-        const heartCanvas = document.getElementById('heartCanvas');
-        const heartCtx = heartCanvas.getContext('2d');
-
-        let width, height;
-
-        function resizeCanvas() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            bgCanvas.width = width;
-            bgCanvas.height = height;
-
-            // Heart Canvas maintains square ratio
-            const heartSize = Math.min(width * 0.8, 380);
-            heartCanvas.width = heartSize;
-            heartCanvas.height = heartSize;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const stars = [];
-        const bgParticles = [];
-        
-        // Generate Stars
-        for (let i = 0; i < 150; i++) {
-            stars.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: Math.random() * 1.5 + 0.5,
-                alpha: Math.random(),
-                speed: Math.random() * 0.02 + 0.005
-            });
-        }
-
-        // Floating Hearts in background
-        class FloatingHeart {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = height + 20;
-                this.size = Math.random() * 12 + 6;
-                this.speedY = Math.random() * 1 + 0.3;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.alpha = Math.random() * 0.5 + 0.3;
-                this.color = `hsla(${Math.random() * 30 + 330}, 80%, 75%, ${this.alpha})`;
-            }
-            update() {
-                this.y -= this.speedY;
-                this.x += Math.sin(this.y * 0.01) * 0.5 + this.speedX;
-                if (this.y < -20) this.reset();
-            }
-            draw(ctx) {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                const s = this.size;
-                ctx.moveTo(0, -s/2);
-                ctx.bezierCurveTo(s/2, -s, s, -s/3, 0, s/2);
-                ctx.bezierCurveTo(-s, -s/3, -s/2, -s, 0, -s/2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        for (let i = 0; i < 25; i++) {
-            bgParticles.push(new FloatingHeart());
-        }
-
-        // Render Background
-        function animateBackground() {
-            bgCtx.clearRect(0, 0, width, height);
-
-            // Draw Stars
-            stars.forEach(star => {
-                star.alpha += star.speed;
-                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
-                bgCtx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
-                bgCtx.beginPath();
-                bgCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                bgCtx.fill();
-            });
-
-            // Draw Background Floating Hearts
-            bgParticles.forEach(p => {
-                p.update();
-                p.draw(bgCtx);
-            });
-
-            requestAnimationFrame(animateBackground);
-        }
-        animateBackground();
-
-        class HeartParticle {
-            constructor(cx, cy, scale) {
-                this.cx = cx;
-                this.cy = cy;
-                this.scale = scale;
-                this.reset();
-            }
-            
-            reset() {
-                // Heart parametric equation
-                const t = Math.random() * Math.PI * 2;
-                // Parametric heart formula
-                const xVal = 16 * Math.pow(Math.sin(t), 3);
-                const yVal = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-
-                this.baseX = this.cx + xVal * this.scale;
-                this.baseY = this.cy + yVal * this.scale;
-
-                this.x = this.cx + (Math.random() - 0.5) * 50;
-                this.y = this.cy + (Math.random() - 0.5) * 50;
-
-                this.vx = (Math.random() - 0.5) * 2;
-                this.vy = (Math.random() - 0.5) * 2;
-
-                this.size = Math.random() * 2.5 + 1;
-                this.color = `hsl(${330 + Math.random() * 30}, 100%, ${65 + Math.random() * 25}%)`;
-                this.alpha = Math.random() * 0.8 + 0.2;
-            }
-
-            update(pulseFactor) {
-                // Return to target heart point with elastic ease
-                const targetX = this.cx + (this.baseX - this.cx) * pulseFactor;
-                const targetY = this.cy + (this.baseY - this.cy) * pulseFactor;
-
-                this.x += (targetX - this.x) * 0.05 + this.vx;
-                this.y += (targetY - this.y) * 0.05 + this.vy;
-
-                this.vx *= 0.92;
-                this.vy *= 0.92;
-            }
-
-            draw(ctx) {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = this.color;
-                ctx.shadowColor = '#f472b6';
-                ctx.shadowBlur = 8;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        const heartParticles = [];
-        const numHeartParticles = 320;
-        let pulseTime = 0;
-
-        function initHeart() {
-            heartParticles.length = 0;
-            const cx = heartCanvas.width / 2;
-            const cy = heartCanvas.height / 2 - 10;
-            const scale = Math.min(heartCanvas.width, heartCanvas.height) / 38;
-
-            for (let i = 0; i < numHeartParticles; i++) {
-                heartParticles.push(new HeartParticle(cx, cy, scale));
-            }
-        }
-        initHeart();
-
-        function animateHeart() {
-            heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
-            
-            pulseTime += 0.04;
-            // Smooth heartbeat scale oscillation
-            const pulse = 1 + Math.sin(pulseTime * 2) * 0.08 + Math.pow(Math.sin(pulseTime * 4), 2) * 0.04;
-
-            heartParticles.forEach(p => {
-                p.update(pulse);
-                p.draw(heartCtx);
-            });
-
-            requestAnimationFrame(animateHeart);
-        }
-        animateHeart();
-
-        function createBurst(x, y) {
-            for (let i = 0; i < 20; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 4 + 2;
-                const particle = new FloatingHeart();
-                particle.x = x;
-                particle.y = y;
-                particle.speedX = Math.cos(angle) * speed;
-                particle.speedY = Math.sin(angle) * speed;
-                particle.size = Math.random() * 10 + 6;
-                bgParticles.push(particle);
-            }
-        }
-
-        window.addEventListener('click', (e) => {
-            // Avoid triggering burst when clicking buttons
-            if (e.target.closest('button')) return;
-            createBurst(e.clientX, e.clientY);
-        });
-
-        heartCanvas.addEventListener('click', (e) => {
-            const rect = heartCanvas.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-
-            // Explode heart particles temporarily
-            heartParticles.forEach(p => {
-                p.vx = (Math.random() - 0.5) * 15;
-                p.vy = (Math.random() - 0.5) * 15;
-            });
-
-            createBurst(x, y);
-        });
-
-        const wishes = [
-            "Mặt trời đã đi ngủ rồi, các vì sao cũng đã lên thắp sáng bầu trời. Chúc Phương Anh gác lại mọi mệt mỏi của ngày hôm nay, ôm lấy chiếc gối ấm áp và có những giấc mơ thật đẹp nhé! ❤️",
-            "Đêm đã về khuya, chúc Phương Anh ngủ thật ngon, có một giấc ngủ say êm đềm và thức dậy với một nụ cười rạng rỡ vào ngày mai! ✨",
-            "Mỗi ngôi sao trên bầu trời tối nay giống như một lời chúc ngọt ngào gửi tới Phương Anh. Chúc em có một đêm bình yên và giấc mơ tràn ngập niềm vui! 🌙",
-            "Nhắm mắt lại và thả lỏng người nào Phương Anh ơi! Hãy để những giấc mơ đẹp đưa em đến những nơi thật bình yên và hạnh phúc. Ngủ ngon nhé em! 💖",
-            "Sương đêm đã xuống lạnh rồi, Phương Anh nhớ đắp chăn thật ấm và ngủ thật ngoan nhen. Chúc em có giấc ngủ thật là ngon giấc! 🧸"
-        ];
-
-        let currentWishIndex = 0;
-        const wishesTextElement = document.getElementById('wishesText');
-        const btnNewWish = document.getElementById('btnNewWish');
-        const btnSendLove = document.getElementById('btnSendLove');
-
-        btnNewWish.addEventListener('click', () => {
-            currentWishIndex = (currentWishIndex + 1) % wishes.length;
-            wishesTextElement.style.opacity = '0';
-            setTimeout(() => {
-                wishesTextElement.innerHTML = `<p class="transition-opacity duration-500">"${wishes[currentWishIndex]}"</p>`;
-                wishesTextElement.style.opacity = '1';
-            }, 300);
-        });
-
-        btnSendLove.addEventListener('click', () => {
-            // Trigger massive heart burst across screen
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const rx = Math.random() * width;
-                    const ry = Math.random() * (height * 0.7);
-                    createBurst(rx, ry);
-                }, i * 150);
-            }
-        });
-
-        let isPlaying = false;
-        let synth, loop;
-
-        async function initAudio() {
-            await Tone.start();
-            
-            // Create soft soothing synth ambient pad
-            synth = new Tone.PolySynth(Tone.Synth, {
-                oscillator: { type: "sine" },
-                envelope: {
-                    attack: 1.5,
-                    decay: 2,
-                    sustain: 0.6,
-                    release: 3
-                }
-            }).toDestination();
-
-            synth.volume.value = -16;
-
-            // Simple calming chord progression (Cmaj7 - Am7 - Fmaj7 - G)
-            const chords = [
-                ["C4", "E4", "G4", "B4"],
-                ["A3", "C4", "E4", "G4"],
-                ["F3", "A3", "C4", "E4"],
-                ["G3", "B3", "D4", "F#4"]
-            ];
-
-            let chordIndex = 0;
-            loop = new Tone.Loop(time => {
-                synth.triggerAttackRelease(chords[chordIndex], "2m", time);
-                chordIndex = (chordIndex + 1) % chords.length;
-            }, "2m");
-
-            Tone.Transport.bpm.value = 55;
-        }
-
-        const musicToggle = document.getElementById('musicToggle');
-        const musicIcon = document.getElementById('musicIcon');
-        const musicStatus = document.getElementById('musicStatus');
-
-        musicToggle.addEventListener('click', async () => {
-            if (!synth) {
-                await initAudio();
-            }
-
-            if (!isPlaying) {
-                Tone.Transport.start();
-                loop.start(0);
-                isPlaying = true;
-                musicStatus.innerText = "Đang Phát 🎵";
-                musicToggle.classList.add('bg-pink-500/40', 'border-pink-400');
-                musicIcon.classList.add('animate-spin');
-            } else {
-                Tone.Transport.stop();
-                isPlaying = false;
-                musicStatus.innerText = "Nhạc Thư Giãn";
-                musicToggle.classList.remove('bg-pink-500/40', 'border-pink-400');
-                musicIcon.classList.remove('animate-spin');
-            }
-        });
-    </script>
-</body>
-</html>
+                <div class="envelope-to">Thư chúc mừng gửi em gái:</div>
+                <div class="envelope-name">Ngô Thu Hằng
